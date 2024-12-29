@@ -29,7 +29,7 @@ The Quantitative Analysis Tool is a Python application designed for performing a
 ## Usage
 
 1. Place your data in a CSV file, e.g., `data.csv`.
-2. Update the `your_data.csv` placeholder in the `if __name__ == "__main__":` section of the code with your file's path.
+2. Update the `data.csv` placeholder in the `if __name__ == "__main__":` section of the code with your file's path.
 3. Specify the relevant column names for analysis in methods like `regression_analysis` and `time_series_analysis`.
 4. Run the script:
    ```bash
