@@ -85,7 +85,7 @@ class QuantitativeAnalysisTool:
 # Example usage:
 if __name__ == "__main__":
     # Load your data from a CSV file
-    df = pd.read_csv('your_data.csv')  # Replace 'your_data.csv' with the path to your CSV file
+    df = pd.read_csv('data.csv')  # Replace 'data.csv' with the path to your CSV file
     tool = QuantitativeAnalysisTool(df)
 
     # Perform analysis
