@@ -59,5 +59,5 @@ if __name__ == "__main__":
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Contributions
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/yourusername/quantitative-analysis-tool/issues).
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/SpiliosDimakopoulos/quantitative-analysis-tool/issues).
 
