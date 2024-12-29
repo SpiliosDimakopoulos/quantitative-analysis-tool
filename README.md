@@ -18,7 +18,7 @@ The Quantitative Analysis Tool is a Python application designed for performing a
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/quantitative-analysis-tool.git
+   git clone https://github.com/SpiliosDimakopoulos/quantitative-analysis-tool.git
    cd quantitative-analysis-tool
    ```
 2. Install the required dependencies:
