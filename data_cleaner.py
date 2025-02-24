@@ -26,6 +26,7 @@ class DataCleaner:
         df = DataCleaner.convert_data_types(df)
         df = DataCleaner.clean_string_columns(df)
         df = DataCleaner.normalize_numerical_columns(df, method=normalization_method)
+        df = DataCleaner.validate_data(df)  # Add data validation step
         return df
 
     @staticmethod
@@ -92,6 +93,22 @@ class DataCleaner:
                 df[col] = (df[col] - df[col].min()) / (df[col].max() - df[col].min())
             elif method == 'zscore':
                 df[col] = (df[col] - df[col].mean()) / df[col].std()
+        return df
+
+    @staticmethod
+    def validate_data(df):
+        """Validate numerical and categorical columns."""
+        # Example: Ensure numerical columns like 'age' are within a reasonable range
+        if 'age' in df.columns.str.lower():
+            print("Validating Age Range:")
+            print(df[(df['age'] < 0) | (df['age'] > 120)])
+
+        # Check for inconsistent categorical values in 'gender' column (case-insensitive)
+        if 'gender' in df.columns.str.lower():
+            print("\nInconsistent Gender Values:")
+            df['gender'] = df['gender'].str.lower()  # Convert all gender values to lowercase
+            print(df['gender'].value_counts())
+        
         return df
 
     @staticmethod
