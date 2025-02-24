@@ -58,38 +58,3 @@ class DataCategorizer:
     @staticmethod
     def categorize(user_choice):
         return DataCategorizer.CATEGORIES.get(user_choice, "Unknown Category")
-
-class DataProcessor:
-    """Main class to handle user input and data processing."""
-    
-    def run(self):
-        print("Select a category:")
-        print("1: Financial Analysis")
-        print("2: Business Analytics")
-        print("3: Scientific/Statistical Analysis")
-        
-        try:
-            user_choice = int(input("Enter your choice (1-3): "))
-        except ValueError:
-            print("Invalid input. Defaulting to Unknown Category.")
-            user_choice = 0
-        
-        category = DataCategorizer.categorize(user_choice)
-        print(f"Selected Category: {category}")
-        
-        source = input("Enter the dataset file path or URL: ")
-        if source.startswith("http"):
-            df = DataLoader.load_from_url(source)
-            print(df)
-        else:
-            df = DataLoader.load_from_file(source)
-            print(df)
-        
-        if df is not None:
-            print("Dataset Loaded Successfully.")
-        else:
-            print("Failed to load dataset.")
-
-if __name__ == "__main__":
-    processor = DataProcessor()
-    processor.run()
