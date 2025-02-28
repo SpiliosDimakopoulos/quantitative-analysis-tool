@@ -1,10 +1,13 @@
+#main.py
+
 import pandas as pd
 import matplotlib.pyplot as plt
 from dataset_loader import DataLoader, DataCategorizer
 from data_cleaner import DataCleaner
 from machine_learning_analysis import MachineLearningAnalysis
-from data_visualization import DataVisualization  # Import DataVisualization class
 from matplotlib.backends.backend_pdf import PdfPages
+from statistical_analysis import StatisticsAnalysis
+from report_generation import ReportGeneration
 
 class Main:
     """Main class to handle user input, data processing, and machine learning analysis."""
@@ -32,33 +35,23 @@ class Main:
         if df is not None:
             print("Dataset Loaded Successfully.")
             print("Cleaning data...\n")
+
+            # Use DataCleaner to clean the dataset
             df = DataCleaner.clean_data(df)
             print("Data Cleaning Complete!")
-            print(df.head())
-            
+
+            # Generate report
             pdf_path = "report.pdf"  # Default report filename
-            DataVisualization.create_report(df, pdf_path)
+            ReportGeneration.create_report(df)
+
+            # Create an instance of StatisticsAnalysis with the loaded DataFrame
+            stats_analysis = StatisticsAnalysis(df)
+
+            # Call run_analysis with the selected category
+            stats_analysis.run_analysis(user_choice)
             
-            '''
-            # Prompt user for algorithm choices
-            target_column = input("Enter the target column name: ")
-            selected_algorithms = MachineLearningAnalysis.prompt_user_algorithm_choice()
-
-            # Apply the selected algorithms
-            results = MachineLearningAnalysis.apply_algorithm(df, selected_algorithms, target_column)
-
-            print("\nModel Results:")
-            for algo, result in results.items():
-                print(f"Algorithm {algo}: {result}")
-
-            # Visualize after analysis
-            with PdfPages(pdf_path) as pdf:
-                DataVisualization.visualize_after_analysis(results, pdf)  # Call to visualize after machine learning analysis
-            '''
-            print(f"Report saved to {pdf_path}") 
-                
         else:
-            print("Failed to load dataset.")
+            print("Failed to load dataset.") 
 
 if __name__ == "__main__":
     processor = Main()

@@ -1,8 +1,6 @@
-import pandas as pd
 import numpy as np
-import scipy.stats as stats
-from io import StringIO
-import chardet
+import pandas as pd
+from scipy import stats
 from sklearn.linear_model import LinearRegression
 
 class StatisticsAnalysis:
@@ -24,7 +22,7 @@ class StatisticsAnalysis:
             self.scientific_statistical_analysis()
         else:
             print("Unknown category.")
-
+        
         # Perform common analysis for all categories
         self.common_analysis()
 
@@ -90,7 +88,6 @@ class StatisticsAnalysis:
             print(f"Average {sales_column.capitalize()}: {self.df[sales_column].mean()}")
         else:
             print("Unable to find suitable columns for business analytics.")
-
 
     def scientific_statistical_analysis(self):
         """Perform scientific/statistical analysis on the dataset."""

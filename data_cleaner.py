@@ -6,19 +6,7 @@ class DataCleaner:
 
     @staticmethod
     def clean_data(df, missing_strategy='median', outlier_strategy='cap', normalization_method='minmax'):
-        """
-        Cleans the dataset by handling missing values, removing duplicates, 
-        handling outliers, converting data types, and normalizing numerical columns.
-        
-        Parameters:
-            df (pd.DataFrame): The dataset.
-            missing_strategy (str): Strategy for handling missing values ('mean', 'median', 'mode', or 'drop').
-            outlier_strategy (str): Strategy for handling outliers ('cap' or 'remove').
-            normalization_method (str): Method for normalizing numerical columns ('minmax' or 'zscore').
 
-        Returns:
-            pd.DataFrame: Cleaned dataset.
-        """
         df = df.copy()
         df = DataCleaner.handle_missing_values(df, strategy=missing_strategy)
         df = df.drop_duplicates()
@@ -27,6 +15,8 @@ class DataCleaner:
         df = DataCleaner.clean_string_columns(df)
         df = DataCleaner.normalize_numerical_columns(df, method=normalization_method)
         df = DataCleaner.validate_data(df)  # Add data validation step
+        df = DataCleaner.encode_categorical(df)
+        
         return df
 
     @staticmethod
@@ -115,3 +105,12 @@ class DataCleaner:
     def preview_data(df, num_rows=5):
         """Preview the first few rows of the dataset."""
         return df.head(num_rows)
+    
+    @staticmethod
+    def encode_categorical(df):
+        """Convert categorical columns to numerical codes."""
+        categorical_columns = df.select_dtypes(include=['object', 'category']).columns
+        df_encoded = df.copy()
+        for col in categorical_columns:
+            df_encoded[col] = df_encoded[col].astype('category').cat.codes
+        return df_encoded
