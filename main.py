@@ -4,6 +4,7 @@ from dataset_loader import DataLoader, DataCategorizer
 from data_cleaner import DataCleaner
 from machine_learning_analysis import MachineLearningAnalysis
 from data_visualization import DataVisualization  # Import DataVisualization class
+from matplotlib.backends.backend_pdf import PdfPages
 
 class Main:
     """Main class to handle user input, data processing, and machine learning analysis."""
@@ -34,10 +35,11 @@ class Main:
             df = DataCleaner.clean_data(df)
             print("Data Cleaning Complete!")
             print(df.head())
-
-            # Visualize before analysis
-            DataVisualization.visualize_before_analysis(df)  # Call to visualize before machine learning analysis
-
+            
+            pdf_path = "report.pdf"  # Default report filename
+            DataVisualization.create_report(df, pdf_path)
+            
+            '''
             # Prompt user for algorithm choices
             target_column = input("Enter the target column name: ")
             selected_algorithms = MachineLearningAnalysis.prompt_user_algorithm_choice()
@@ -50,7 +52,11 @@ class Main:
                 print(f"Algorithm {algo}: {result}")
 
             # Visualize after analysis
-            DataVisualization.visualize_after_analysis(results)  # Call to visualize after machine learning analysis
+            with PdfPages(pdf_path) as pdf:
+                DataVisualization.visualize_after_analysis(results, pdf)  # Call to visualize after machine learning analysis
+            '''
+            print(f"Report saved to {pdf_path}") 
+                
         else:
             print("Failed to load dataset.")
 
